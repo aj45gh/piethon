@@ -133,3 +133,19 @@ def test_divide_nothing(stack_obj):
     stack_obj.divide()
 
     assert len(stack_obj) == 1
+
+
+def test_divide_floor(stack_obj):
+    stack_obj.push(21)
+    stack_obj.push(2)
+    stack_obj.divide()
+
+    assert stack_obj.top == 10
+
+
+def test_divide_by_one(stack_obj):
+    stack_obj.push(100)
+    stack_obj.push(1)
+    stack_obj.divide()
+
+    assert stack_obj.top == 100

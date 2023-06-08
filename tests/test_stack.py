@@ -86,3 +86,35 @@ def test_multiply(stack_obj):
     stack_obj.multiply()
 
     assert stack_obj.top == 50
+
+
+def test_multiply_by_one(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.multiply()
+
+    assert stack_obj.top == 2
+
+
+def test_multiply_by_zero(stack_obj):
+    stack_obj.push(100)
+    stack_obj.push(0)
+    stack_obj.multiply()
+
+    assert stack_obj.top == 0
+
+
+def test_multiply_negative(stack_obj):
+    stack_obj.push(100)
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.subtract()
+    stack_obj.multiply()
+
+    assert stack_obj.top == -100
+
+
+def test_multiply_nothing(stack_obj):
+    stack_obj.multiply()
+
+    assert len(stack_obj) == 0

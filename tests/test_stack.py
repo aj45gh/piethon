@@ -149,3 +149,11 @@ def test_divide_by_one(stack_obj):
     stack_obj.divide()
 
     assert stack_obj.top == 100
+
+
+def test_divide_by_zero(stack_obj):
+    stack_obj.push(20)
+    stack_obj.push(0)
+    stack_obj.divide()
+
+    assert stack_obj.top == 0

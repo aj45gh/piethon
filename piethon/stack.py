@@ -70,6 +70,9 @@ class Stack:
         if len(self) < 2:
             return
 
+        if self.top == 0:
+            return
+
         self.top.prev //= self.top
         self.pop()
 

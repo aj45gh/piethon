@@ -105,10 +105,11 @@ def test_multiply_by_zero(stack_obj):
 
 
 def test_multiply_negative(stack_obj):
-    stack_obj.push(100)
     stack_obj.push(1)
     stack_obj.push(2)
     stack_obj.subtract()
+
+    stack_obj.push(100)
     stack_obj.multiply()
 
     assert stack_obj.top == -100
@@ -157,3 +158,14 @@ def test_divide_by_zero(stack_obj):
     stack_obj.divide()
 
     assert stack_obj.top == 0
+
+
+def test_negative_division(stack_obj):
+    stack_obj.push(10)
+    stack_obj.push(20)
+    stack_obj.subtract()
+
+    stack_obj.push(2)
+    stack_obj.divide()
+
+    assert stack_obj.top == -5

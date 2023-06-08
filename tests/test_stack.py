@@ -78,3 +78,11 @@ def test_subtract_nothing(stack_obj):
     stack_obj.subtract()
 
     assert len(stack_obj) == 1
+
+
+def test_multiply(stack_obj):
+    stack_obj.push(5)
+    stack_obj.push(10)
+    stack_obj.multiply()
+
+    assert stack_obj.top == 50

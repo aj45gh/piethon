@@ -47,6 +47,16 @@ class Stack:
         self.top.prev -= self.top
         self.pop()
 
+    def multiply(self) -> None:
+        """
+        Take the top two items off the stack,
+        multiply them together,
+        then put the result on top.
+        """
+
+        self.top.prev *= self.top
+        self.pop()
+
 
 class StackItem:
     def __init__(self, val: int, prev: Optional["StackItem"] = None):
@@ -67,4 +77,8 @@ class StackItem:
 
     def __isub__(self, x: "StackItem") -> "StackItem":
         self.val -= x.val
+        return self
+
+    def __imul__(self, x: "StackItem") -> "StackItem":
+        self.val *= x.val
         return self

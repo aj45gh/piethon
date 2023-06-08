@@ -118,3 +118,11 @@ def test_multiply_nothing(stack_obj):
     stack_obj.multiply()
 
     assert len(stack_obj) == 0
+
+
+def test_divide(stack_obj):
+    stack_obj.push(8)
+    stack_obj.push(2)
+    stack_obj.divide()
+
+    assert stack_obj.top == 4

@@ -60,6 +60,16 @@ class Stack:
         self.top.prev *= self.top
         self.pop()
 
+    def divide(self) -> None:
+        """
+        Take the top two items off the stack,
+        divide the second by the first,
+        then put the result on top.
+        """
+
+        self.top.prev //= self.top
+        self.pop()
+
 
 class StackItem:
     def __init__(self, val: int, prev: Optional["StackItem"] = None):
@@ -84,4 +94,8 @@ class StackItem:
 
     def __imul__(self, x: "StackItem") -> "StackItem":
         self.val *= x.val
+        return self
+
+    def __floordiv__(self, x: "StackItem") -> "StackItem":
+        self.val //= x.val
         return self

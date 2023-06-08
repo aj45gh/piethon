@@ -126,3 +126,10 @@ def test_divide(stack_obj):
     stack_obj.divide()
 
     assert stack_obj.top == 4
+
+
+def test_divide_nothing(stack_obj):
+    stack_obj.push(1)
+    stack_obj.divide()
+
+    assert len(stack_obj) == 1

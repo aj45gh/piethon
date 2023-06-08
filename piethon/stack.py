@@ -67,6 +67,9 @@ class Stack:
         then put the result on top.
         """
 
+        if len(self) < 2:
+            return
+
         self.top.prev //= self.top
         self.pop()
 

@@ -77,9 +77,6 @@ class Stack:
         then put the result on top.
         """
 
-        if self.top == 0:
-            return
-
         self.top.prev //= self.top
         self.pop()
 
@@ -90,9 +87,6 @@ class Stack:
         calculate the second modulo the first,
         then put the result on top.
         """
-
-        if self.top == 0:
-            return
 
         self.top.prev %= self.top
         self.pop()

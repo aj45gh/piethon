@@ -1,6 +1,14 @@
 from typing import Optional
 
 
+def needs_one_item(func):
+    def wrapper(self: "Stack"):
+        if len(self) > 0:
+            return func(self)
+
+    return wrapper
+
+
 def needs_two_items(func):
     def wrapper(self: "Stack"):
         if len(self) > 1:
@@ -90,6 +98,15 @@ class Stack:
 
         self.top.prev %= self.top
         self.pop()
+
+    @needs_one_item
+    def negate(self) -> None:
+        """
+        Replace the top value of the stack with zero if it is non-zero,
+        or 1 if it is zero.
+        """
+
+        self.top.val = int(not bool(self.top.val))
 
 
 class StackItem:

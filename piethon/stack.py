@@ -3,10 +3,17 @@ from typing import Optional
 
 def needs_two_items(func):
     def wrapper(self: "Stack"):
-        if len(self) < 2:
-            return
+        if len(self) > 1:
+            return func(self)
 
-        return func(self)
+    return wrapper
+
+
+def does_division(func):
+    @needs_two_items
+    def wrapper(self: "Stack"):
+        if self.top != 0:
+            return func(self)
 
     return wrapper
 
@@ -26,10 +33,8 @@ class Stack:
     def pop(self) -> None:
         """Take the top value off the stack and discard it."""
 
-        if not self.top:
-            return
-
-        self.top = self.top.prev
+        if self.top:
+            self.top = self.top.prev
 
     @needs_two_items
     def add(self) -> None:
@@ -64,7 +69,7 @@ class Stack:
         self.top.prev *= self.top
         self.pop()
 
-    @needs_two_items
+    @does_division
     def divide(self) -> None:
         """
         Take the top two values off the stack,
@@ -78,7 +83,7 @@ class Stack:
         self.top.prev //= self.top
         self.pop()
 
-    @needs_two_items
+    @does_division
     def modulo(self) -> None:
         """
         Take the top two values off the stack,

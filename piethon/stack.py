@@ -1,6 +1,16 @@
 from typing import Optional
 
 
+def needs_two_items(func):
+    def wrapper(self: "Stack"):
+        if len(self) < 2:
+            return
+
+        return func(self)
+
+    return wrapper
+
+
 class Stack:
     def __init__(self):
         self.top = StackItem(val=None)
@@ -21,6 +31,7 @@ class Stack:
 
         self.top = self.top.prev
 
+    @needs_two_items
     def add(self) -> None:
         """
         Take the top two values off the stack,
@@ -28,12 +39,10 @@ class Stack:
         then put the result on top.
         """
 
-        if len(self) < 2:
-            return
-
         self.top.prev += self.top
         self.pop()
 
+    @needs_two_items
     def subtract(self) -> None:
         """
         Take the top two values off the stack,
@@ -41,12 +50,10 @@ class Stack:
         then put the result on top.
         """
 
-        if len(self) < 2:
-            return
-
         self.top.prev -= self.top
         self.pop()
 
+    @needs_two_items
     def multiply(self) -> None:
         """
         Take the top two values off the stack,
@@ -54,12 +61,10 @@ class Stack:
         then put the result on top.
         """
 
-        if len(self) < 2:
-            return
-
         self.top.prev *= self.top
         self.pop()
 
+    @needs_two_items
     def divide(self) -> None:
         """
         Take the top two values off the stack,
@@ -67,24 +72,19 @@ class Stack:
         then put the result on top.
         """
 
-        if len(self) < 2:
-            return
-
         if self.top == 0:
             return
 
         self.top.prev //= self.top
         self.pop()
 
+    @needs_two_items
     def modulo(self) -> None:
         """
         Take the top two values off the stack,
         calculate the second modulo the first,
         then put the result on top.
         """
-
-        if len(self) < 2:
-            return
 
         if self.top == 0:
             return

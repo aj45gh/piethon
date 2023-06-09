@@ -177,7 +177,7 @@ def test_negative_division(stack_obj):
     assert stack_obj.top == -5
 
 
-# Modulus
+# Modulo
 def test_modulo_remainder(stack_obj):
     stack_obj.push(3)
     stack_obj.push(2)
@@ -199,3 +199,16 @@ def test_modulo_by_zero(stack_obj):
     stack_obj.modulo()
 
     assert stack_obj.top == 0
+
+
+def test_modulo_negative(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.subtract()
+
+    assert stack_obj.top == -1
+
+    stack_obj.push(3)
+    stack_obj.modulo()
+
+    assert stack_obj.top == 2

@@ -8,6 +8,7 @@ def stack_obj() -> Stack:
     return Stack()
 
 
+# Push
 def test_stack_push_value(stack_obj):
     stack_obj.push(1)
     assert stack_obj.top == 1
@@ -27,6 +28,7 @@ def test_stack_push_length(stack_obj):
     assert len(stack_obj) == 2
 
 
+# Pop
 def test_stack_pop(stack_obj):
     stack_obj.push(1)
     stack_obj.push(2)
@@ -39,6 +41,7 @@ def test_stack_pop_nothing(stack_obj):
     stack_obj.pop()
 
 
+# Add
 def test_stack_add(stack_obj):
     stack_obj.push(1)
     stack_obj.push(2)
@@ -55,6 +58,7 @@ def test_stack_add_nothing(stack_obj):
     assert len(stack_obj) == 1
 
 
+# Subtract
 def test_stack_subtract(stack_obj):
     stack_obj.push(3)
     stack_obj.push(2)
@@ -80,6 +84,7 @@ def test_subtract_nothing(stack_obj):
     assert len(stack_obj) == 1
 
 
+# Multiply
 def test_multiply(stack_obj):
     stack_obj.push(5)
     stack_obj.push(10)
@@ -121,6 +126,7 @@ def test_multiply_nothing(stack_obj):
     assert len(stack_obj) == 0
 
 
+# Divide
 def test_divide(stack_obj):
     stack_obj.push(8)
     stack_obj.push(2)
@@ -169,3 +175,27 @@ def test_negative_division(stack_obj):
     stack_obj.divide()
 
     assert stack_obj.top == -5
+
+
+# Modulus
+def test_modulo_remainder(stack_obj):
+    stack_obj.push(3)
+    stack_obj.push(2)
+    stack_obj.modulo()
+
+    assert stack_obj.top == 1
+
+
+def test_modulo_nothing(stack_obj):
+    stack_obj.push(10)
+    stack_obj.modulo()
+
+    assert stack_obj.top == 10
+
+
+def test_modulo_by_zero(stack_obj):
+    stack_obj.push(300)
+    stack_obj.push(0)
+    stack_obj.modulo()
+
+    assert stack_obj.top == 0

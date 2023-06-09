@@ -108,6 +108,35 @@ class Stack:
 
         self.top.val = int(not bool(self.top.val))
 
+    @needs_two_items
+    def greater(self) -> None:
+        """
+        Take the top two values off the stack,
+        then put 1 on top if the second value is greater,
+        or 0 if it is not greater.
+        """
+
+        self.top.prev.val = int(self.top.prev > self.top)
+        self.pop()
+
+    def pointer(self) -> None:
+        raise NotImplementedError
+
+    def switch(self) -> None:
+        raise NotImplementedError
+
+    def duplicate(self) -> None:
+        raise NotImplementedError
+
+    def roll(self) -> None:
+        raise NotImplementedError
+
+    def stdin(self, val: int) -> None:
+        raise NotImplementedError
+
+    def stdout(self) -> int:
+        raise NotImplementedError
+
 
 class StackItem:
     def __init__(self, val: int, prev: Optional["StackItem"] = None):
@@ -141,3 +170,6 @@ class StackItem:
     def __imod__(self, x: "StackItem") -> "StackItem":
         self.val %= x.val
         return self
+
+    def __gt__(self, x: "StackItem") -> bool:
+        return self.val > x.val

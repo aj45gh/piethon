@@ -217,6 +217,7 @@ def test_modulo_negative(stack_obj):
     assert stack_obj.top == 2
 
 
+# Not/negate
 def test_negate_positive(stack_obj):
     stack_obj.push(1)
 
@@ -244,5 +245,42 @@ def test_negate_negative(stack_obj):
 
 def test_negate_empty(stack_obj):
     stack_obj.negate()
+    assert stack_obj.top.val is None
 
+
+# Greater
+def test_greater_true(stack_obj):
+    stack_obj.push(3)
+    stack_obj.push(2)
+
+    stack_obj.greater()
+    assert stack_obj.top == 1
+
+
+def test_greater_false(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+
+    stack_obj.greater()
+    assert stack_obj.top == 0
+
+
+def test_greater_equal(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(1)
+
+    stack_obj.greater()
+    assert stack_obj.top == 0
+
+
+def test_greater_negative(stack_obj):
+    stack_obj.push(-1)
+    stack_obj.push(-2)
+
+    stack_obj.greater()
+    assert stack_obj.top == 1
+
+
+def test_greater_empty(stack_obj):
+    stack_obj.greater()
     assert stack_obj.top.val is None

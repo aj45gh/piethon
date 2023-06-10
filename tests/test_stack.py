@@ -284,3 +284,17 @@ def test_greater_negative(stack_obj):
 def test_greater_empty(stack_obj):
     stack_obj.greater()
     assert stack_obj.top.val is None
+
+
+# Duplicate
+def test_duplicate(stack_obj):
+    stack_obj.push(1)
+
+    stack_obj.duplicate()
+    assert stack_obj.top.prev == 1
+    assert len(stack_obj) == 2
+
+
+def test_duplicate_empty(stack_obj):
+    stack_obj.duplicate()
+    assert stack_obj.top.prev is None

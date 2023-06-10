@@ -125,8 +125,13 @@ class Stack:
     def switch(self) -> None:
         raise NotImplementedError
 
+    @needs_one_item
     def duplicate(self) -> None:
-        raise NotImplementedError
+        """
+        Put a copy of the top value on top of the stack.
+        """
+
+        self.push(self.top.val)
 
     def roll(self) -> None:
         raise NotImplementedError

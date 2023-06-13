@@ -33,6 +33,12 @@ class Stack:
     def __len__(self):
         return self.top.idx
 
+    def __iter__(self):
+        i = self.top
+        while i:
+            yield i.val
+            i = i.prev
+
     def push(self, val: int) -> None:
         """Put a value on the top of the stack."""
 
@@ -134,7 +140,26 @@ class Stack:
         self.push(self.top.val)
 
     def roll(self) -> None:
-        raise NotImplementedError
+        num_rolls = self.top.val
+        self.pop()
+
+        depth = self.top.val
+        self.pop()
+
+        if num_rolls < 0:
+            num_rolls = depth - num_rolls
+
+        for _ in range(0, num_rolls):
+            move = self.top
+            next = move
+
+            for _ in range(1, depth):
+                next = next.prev
+
+            self.pop()
+
+            move.prev = next.prev
+            next.prev = move
 
     def stdin(self, val: int) -> None:
         raise NotImplementedError
@@ -148,6 +173,16 @@ class StackItem:
         self.val = val
         self.prev = prev
 
+    @property
+    def prev(self) -> "StackItem":
+        return self._prev
+
+    @prev.setter
+    def prev(self, val: "StackItem") -> None:
+        self._prev = val
+        self.update_idx()
+
+    def update_idx(self):
         self.idx = self.prev.idx + 1 if self else 0
 
     def __eq__(self, x: int) -> bool:

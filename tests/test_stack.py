@@ -298,3 +298,86 @@ def test_duplicate(stack_obj):
 def test_duplicate_empty(stack_obj):
     stack_obj.duplicate()
     assert stack_obj.top.prev is None
+
+
+# Roll
+def test_roll_once_by_two(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.push(3)
+    stack_obj.push(4)
+    stack_obj.push(5)
+
+    stack_obj.push(2)
+    stack_obj.push(1)
+
+    stack_obj.roll()
+    assert [*stack_obj] == [4, 5, 3, 2, 1]
+
+
+def test_roll_once_by_three(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.push(3)
+    stack_obj.push(4)
+    stack_obj.push(5)
+
+    stack_obj.push(3)
+    stack_obj.push(1)
+
+    stack_obj.roll()
+    assert [*stack_obj] == [4, 3, 5, 2, 1]
+
+
+def test_roll_twice_by_two(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.push(3)
+    stack_obj.push(4)
+    stack_obj.push(5)
+
+    stack_obj.push(2)
+    stack_obj.push(2)
+
+    stack_obj.roll()
+    assert [*stack_obj] == [5, 4, 3, 2, 1]
+
+
+def test_roll_twice_by_three(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.push(3)
+    stack_obj.push(4)
+    stack_obj.push(5)
+
+    stack_obj.push(3)
+    stack_obj.push(2)
+
+    stack_obj.roll()
+    assert [*stack_obj] == [3, 5, 4, 2, 1]
+
+
+def test_roll_negative_once_by_three(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.push(3)
+    stack_obj.push(4)
+    stack_obj.push(5)
+
+    stack_obj.push(3)
+
+    stack_obj.push(1)
+    stack_obj.push(3)
+    stack_obj.subtract()
+
+    stack_obj.roll()
+    assert [*stack_obj] == [3, 5, 4, 2, 1]
+
+
+# __iter__
+def test_iter(stack_obj):
+    stack_obj.push(1)
+    stack_obj.push(2)
+    stack_obj.push(2)
+
+    assert [*stack_obj] == [2, 2, 1]

@@ -35,6 +35,7 @@ class Stack:
 
     def __iter__(self):
         i = self.top
+
         while i:
             yield i.val
             i = i.prev
@@ -44,11 +45,14 @@ class Stack:
 
         self.top = StackItem(val=val, prev=self.top)
 
+    @needs_one_item
     def pop(self) -> None:
         """Take the top value off the stack and discard it."""
 
-        if self.top:
-            self.top = self.top.prev
+        val = self.top.val
+        self.top = self.top.prev
+
+        return val
 
     @needs_two_items
     def add(self) -> None:
@@ -58,8 +62,10 @@ class Stack:
         then put the result on top.
         """
 
-        self.top.prev += self.top
-        self.pop()
+        first = self.pop()
+        second = self.pop()
+
+        self.push(second + first)
 
     @needs_two_items
     def subtract(self) -> None:
@@ -69,8 +75,10 @@ class Stack:
         then put the result on top.
         """
 
-        self.top.prev -= self.top
-        self.pop()
+        first = self.pop()
+        second = self.pop()
+
+        self.push(second - first)
 
     @needs_two_items
     def multiply(self) -> None:
@@ -80,8 +88,10 @@ class Stack:
         then put the result on top.
         """
 
-        self.top.prev *= self.top
-        self.pop()
+        first = self.pop()
+        second = self.pop()
+
+        self.push(second * first)
 
     @does_division
     def divide(self) -> None:
@@ -91,8 +101,10 @@ class Stack:
         then put the result on top.
         """
 
-        self.top.prev //= self.top
-        self.pop()
+        first = self.pop()
+        second = self.pop()
+
+        self.push(second // first)
 
     @does_division
     def modulo(self) -> None:
@@ -102,8 +114,10 @@ class Stack:
         then put the result on top.
         """
 
-        self.top.prev %= self.top
-        self.pop()
+        first = self.pop()
+        second = self.pop()
+
+        self.push(second % first)
 
     @needs_one_item
     def negate(self) -> None:
@@ -122,8 +136,10 @@ class Stack:
         or 0 if it is not greater.
         """
 
-        self.top.prev.val = int(self.top.prev > self.top)
-        self.pop()
+        first = self.pop()
+        second = self.pop()
+
+        self.push(second > first)
 
     def pointer(self) -> None:
         raise NotImplementedError
@@ -140,11 +156,8 @@ class Stack:
         self.push(self.top.val)
 
     def roll(self) -> None:
-        num_rolls = self.top.val
-        self.pop()
-
-        depth = self.top.val
-        self.pop()
+        num_rolls = self.pop()
+        depth = self.pop()
 
         if num_rolls < 0:
             num_rolls = depth - num_rolls
@@ -162,10 +175,10 @@ class Stack:
             next.prev = move
 
     def stdin(self, val: int) -> None:
-        raise NotImplementedError
+        self.push(val)
 
     def stdout(self) -> int:
-        raise NotImplementedError
+        return self.pop()
 
 
 class StackItem:
@@ -190,26 +203,3 @@ class StackItem:
 
     def __bool__(self) -> bool:
         return self.val is not None
-
-    def __iadd__(self, x: "StackItem") -> "StackItem":
-        self.val += x.val
-        return self
-
-    def __isub__(self, x: "StackItem") -> "StackItem":
-        self.val -= x.val
-        return self
-
-    def __imul__(self, x: "StackItem") -> "StackItem":
-        self.val *= x.val
-        return self
-
-    def __floordiv__(self, x: "StackItem") -> "StackItem":
-        self.val //= x.val
-        return self
-
-    def __imod__(self, x: "StackItem") -> "StackItem":
-        self.val %= x.val
-        return self
-
-    def __gt__(self, x: "StackItem") -> bool:
-        return self.val > x.val

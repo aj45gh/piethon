@@ -1,13 +1,3 @@
-from piethon.stack import Stack
-
-import pytest
-
-
-@pytest.fixture
-def stack_obj() -> Stack:
-    return Stack()
-
-
 # Push
 def test_stack_push_value(stack_obj):
     stack_obj.push(1)
